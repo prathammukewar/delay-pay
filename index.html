@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flight delayed? See what the airline owes you | Delay Pay</title>
+<meta name="description" content="Late, cancelled or bumped? Check EU261, UK261, Canada's APPR and US rules in 30 seconds, see the exact amount the airline owes you, and get a free claim letter. No sign-up, no cut.">
+<link rel="canonical" href="https://prathammukewar.github.io/delay-pay/">
+<meta name="theme-color" content="#ffcc00">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Delay Pay">
+<meta property="og:title" content="Flight delayed? See what the airline owes you">
+<meta property="og:description" content="Late, cancelled or bumped? Airlines can owe you up to €600, £520 or C$2,400. Check your flight in 30 seconds and get the claim letter free.">
+<meta property="og:url" content="https://prathammukewar.github.io/delay-pay/">
+<meta property="og:image" content="https://prathammukewar.github.io/delay-pay/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A departures board reading: you could be owed €600.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Flight delayed? See what the airline owes you">
+<meta name="twitter:description" content="Late, cancelled or bumped? Airlines can owe you up to €600, £520 or C$2,400. Check your flight in 30 seconds and get the claim letter free.">
+<meta name="twitter:image" content="https://prathammukewar.github.io/delay-pay/og-image.png">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<script>
+  try {
+    var t = localStorage.getItem('delaypay-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+</script>
+<script type="module" src="js/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#check">Skip to the checker</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-plane" viewBox="0 0 24 24"><path fill="currentColor" d="M22 15.6v-1.9l-8.4-5.3V3.3C13.6 2.4 12.9 1.6 12 1.6s-1.6.8-1.6 1.7v5.1L2 13.7v1.9l8.4-2.6v5.2l-2.1 1.6v1.5l3.7-1.1 3.7 1.1v-1.5l-2.1-1.6V13z"/></symbol>
+    <symbol id="i-depart" viewBox="0 0 24 24"><g transform="rotate(-38 12 12)"><path fill="currentColor" d="M22 15.6v-1.9l-8.4-5.3V3.3C13.6 2.4 12.9 1.6 12 1.6s-1.6.8-1.6 1.7v5.1L2 13.7v1.9l8.4-2.6v5.2l-2.1 1.6v1.5l3.7-1.1 3.7 1.1v-1.5l-2.1-1.6V13z"/></g><rect x="2" y="21" width="20" height="1.8" fill="currentColor"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></g></symbol>
+    <symbol id="i-cancel" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 8.5l7 7M15.5 8.5l-7 7"/></g></symbol>
+    <symbol id="i-bumped" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="6" r="2.6"/><path d="M4.5 21v-5.5A4.5 4.5 0 0 1 9 11a4.5 4.5 0 0 1 4.5 4.5V21"/><path d="M15.5 9.5l5 5M20.5 9.5l-5 5"/></g></symbol>
+    <symbol id="i-seat" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v10a2 2 0 0 0 2 2h8"/><path d="M6 15l-1 6M16 15l1.5 6"/><path d="M18 4v6M15.5 7.5L18 10l2.5-2.5"/></g></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16.5 9"/></g></symbol>
+    <symbol id="i-warn" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5l9.5 16.5h-19z"/><path d="M12 10v4.5M12 17.4v.1"/></g></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.6v.1"/></g></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v15M6 13l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h2"/></g></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6l8.5 7 8.5-7"/></g></symbol>
+    <symbol id="i-save" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M4 20h16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-share" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7.5 7.5L12 3l4.5 4.5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></g></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></g></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+    <symbol id="i-letter" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M6 3h9l4 4v14H6z"/><path d="M14.5 3v4.5H19M9 12h7M9 15.5h7M9 9h3"/></g></symbol>
+  </defs>
+</svg>
+
+<header class="signbar">
+  <div class="wrap">
+    <a class="brand" href="./" aria-label="Delay Pay, home">
+      <svg aria-hidden="true"><use href="#i-depart"/></svg>
+      <span>Delay Pay</span>
+    </a>
+    <nav class="signnav" aria-label="Sections">
+      <a href="#check"><svg aria-hidden="true"><use href="#i-arrow"/></svg>Check</a>
+      <a href="#cheat" class="hide-sm">Cheat sheet</a>
+      <a href="#faq" class="hide-sm">FAQ</a>
+      <button class="theme-btn" id="theme-btn" type="button" aria-label="Switch to dark theme">
+        <svg aria-hidden="true"><use href="#i-moon"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="kicker">Late · Cancelled · Bumped · Downgraded</p>
+        <h1>Late flight? You could be owed <span class="hl">€600</span></h1>
+        <p class="lede">Airlines flying in Europe and the UK owe you up to <strong>€600 or £520</strong> when you land 3 hours late, lose your flight at short notice or get bumped. Canada pays up to <strong>C$1,000</strong> for a delay and C$2,400 if you’re bumped. Check your flight in 30 seconds, then send the claim yourself with a letter that cites the law. Claim companies keep a quarter to half of the payout for sending that same letter.</p>
+        <div class="cta-row">
+          <a class="btn btn-signal" href="#check">Check my flight <svg aria-hidden="true"><use href="#i-down"/></svg></a>
+          <span class="note-inline">It’s free, there’s no sign-up, and nothing leaves your browser.</span>
+        </div>
+      </div>
+      <div class="board" id="hero-board">
+        <div class="board-head">
+          <span class="board-title"><svg aria-hidden="true"><use href="#i-depart"/></svg>Departures</span>
+          <span class="board-clock" id="board-clock" aria-hidden="true">--:--</span>
+        </div>
+        <table>
+          <caption class="sr-only">Example flights and what the rules say each one is owed</caption>
+          <thead>
+            <tr><th scope="col">Route</th><th scope="col" class="col-flight">Status</th><th scope="col" class="owed">Owed</th></tr>
+          </thead>
+          <tbody id="board-rows"></tbody>
+        </table>
+        <div class="board-foot"><span>Example flights, real rules</span><span>Rules checked Sep 2026</span></div>
+      </div>
+    </div>
+  </div>
+
+  <section id="check" aria-labelledby="check-title">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="kicker">Step 1 · About 30 seconds</p>
+          <h2 id="check-title">Check your flight</h2>
+          <p>Tell us what happened. The rules engine runs right here on your device and checks EU261, UK261, Canada’s APPR and the US DOT rules.</p>
+        </div>
+      </div>
+
+      <form class="pass" id="checker" novalidate>
+        <div class="pass-main">
+          <div class="pass-strip"><span><strong>Boarding pass</strong> · claim check</span><span>Nothing leaves your browser</span></div>
+
+          <fieldset>
+            <legend class="sr-only">Route</legend>
+            <div class="row row-2">
+              <div class="field">
+                <label class="label" for="from">Flying from</label>
+                <div class="combo">
+                  <input type="text" id="from" name="from" placeholder="City, airport or code" aria-describedby="from-picked from-err" required>
+                  <button type="button" class="combo-clear" tabindex="-1" aria-label="Clear departure airport"><svg aria-hidden="true"><use href="#i-x"/></svg></button>
+                </div>
+                <p class="picked" id="from-picked"></p>
+                <p class="err" id="from-err"></p>
+              </div>
+              <div class="field">
+                <label class="label" for="to">Final destination</label>
+                <div class="combo">
+                  <input type="text" id="to" name="to" placeholder="Where the trip ended" aria-describedby="to-picked to-err" required>
+                  <button type="button" class="combo-clear" tabindex="-1" aria-label="Clear destination airport"><svg aria-hidden="true"><use href="#i-x"/></svg></button>
+                </div>
+                <p class="picked" id="to-picked"></p>
+                <p class="err" id="to-err"></p>
+              </div>
+            </div>
+
+            <div class="via-list" id="via-list"></div>
+            <button type="button" class="linkish" id="add-via"><svg aria-hidden="true"><use href="#i-plus"/></svg>I changed planes</button>
+            <div id="booking-wrap" hidden>
+              <label class="check"><input type="checkbox" id="single-booking" checked> All flights were on one booking</label>
+              <p class="hint">On one booking, the delay that counts is the one at your final destination, and the distance runs from your first airport to your last.</p>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend class="sr-only">Airline</legend>
+            <label class="label" for="airline">Airline that operated the flight</label>
+            <div class="combo">
+              <input type="text" id="airline" name="airline" placeholder="Name or code, like BA or Ryanair" aria-describedby="airline-picked airline-hint">
+              <button type="button" class="combo-clear" tabindex="-1" aria-label="Clear airline"><svg aria-hidden="true"><use href="#i-x"/></svg></button>
+            </div>
+            <p class="picked" id="airline-picked"></p>
+            <p class="hint" id="airline-hint">Your booking says “operated by”. On a connection, pick the airline flying the leg that went wrong.</p>
+
+            <div class="sub" id="licence-wrap" hidden>
+              <fieldset>
+                <legend class="q">We don’t know that one. Where is the airline licensed?</legend>
+                <div class="choices five" id="licence-choices">
+                  <div class="choice"><input type="radio" name="licence" id="lic-eu" value="EU"><label for="lic-eu">EU, EEA or Swiss</label></div>
+                  <div class="choice"><input type="radio" name="licence" id="lic-uk" value="UK"><label for="lic-uk">UK</label></div>
+                  <div class="choice"><input type="radio" name="licence" id="lic-us" value="US"><label for="lic-us">US</label></div>
+                  <div class="choice"><input type="radio" name="licence" id="lic-ca" value="CA"><label for="lic-ca">Canada</label></div>
+                  <div class="choice"><input type="radio" name="licence" id="lic-other" value="OTHER"><label for="lic-other">Elsewhere</label></div>
+                </div>
+                <p class="hint">It only matters for flights into Europe or the UK from outside. Not sure? Pick “Elsewhere” and we’ll tell you what changes.</p>
+              </fieldset>
+            </div>
+
+            <div class="sub" id="casize-wrap" hidden>
+              <fieldset>
+                <legend class="q">Is it a large or small airline under Canada’s rules?</legend>
+                <div class="choices two">
+                  <div class="choice"><input type="radio" name="casize" id="ca-large" value="large" checked><label for="ca-large">Large<small>2 million+ passengers a year, both of the last two years</small></label></div>
+                  <div class="choice"><input type="radio" name="casize" id="ca-small" value="small"><label for="ca-small">Small<small>Regional and northern airlines, mostly</small></label></div>
+                </div>
+              </fieldset>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend class="label">What happened?</legend>
+            <div class="choices" id="event-choices">
+              <div class="choice"><input type="radio" name="event" id="ev-delay" value="delay" checked><label for="ev-delay"><svg aria-hidden="true"><use href="#i-clock"/></svg>Arrived late</label></div>
+              <div class="choice"><input type="radio" name="event" id="ev-cancel" value="cancel"><label for="ev-cancel"><svg aria-hidden="true"><use href="#i-cancel"/></svg>Cancelled</label></div>
+              <div class="choice"><input type="radio" name="event" id="ev-denied" value="denied"><label for="ev-denied"><svg aria-hidden="true"><use href="#i-bumped"/></svg>Bumped<small>Denied boarding</small></label></div>
+              <div class="choice"><input type="radio" name="event" id="ev-downgrade" value="downgrade"><label for="ev-downgrade"><svg aria-hidden="true"><use href="#i-seat"/></svg>Downgraded<small>Lower class</small></label></div>
+            </div>
+
+            <div class="sub" id="delay-wrap">
+              <div>
+                <p class="q" id="delay-q">How late did you reach your final destination?</p>
+                <div class="duration" role="group" aria-labelledby="delay-q">
+                  <div class="unit"><input type="number" id="delay-h" min="0" max="96" step="1" inputmode="numeric" value="" placeholder="0" aria-label="Hours late"><span aria-hidden="true">h</span></div>
+                  <div class="unit"><input type="number" id="delay-m" min="0" max="59" step="5" inputmode="numeric" value="" placeholder="00" aria-label="Minutes late"><span aria-hidden="true">min</span></div>
+                </div>
+                <div class="quick" role="group" aria-label="Quick picks for how late">
+                  <button type="button" data-h="2" data-m="30">2h 30</button>
+                  <button type="button" data-h="3" data-m="15">3h 15</button>
+                  <button type="button" data-h="4" data-m="30">4h 30</button>
+                  <button type="button" data-h="7" data-m="0">7h</button>
+                  <button type="button" data-h="10" data-m="0">10h+</button>
+                </div>
+                <p class="hint">Count from the scheduled arrival to when the doors opened at the gate. Missed a connection? Count the delay at your final stop.</p>
+                <p class="err" id="delay-err"></p>
+              </div>
+            </div>
+
+            <div class="sub" id="cancel-wrap" hidden>
+              <fieldset>
+                <legend class="q">When did they tell you?</legend>
+                <div class="choices three">
+                  <div class="choice"><input type="radio" name="notice" id="nt-14" value="14+"><label for="nt-14">14+ days before</label></div>
+                  <div class="choice"><input type="radio" name="notice" id="nt-7" value="7-13"><label for="nt-7">7 to 13 days before</label></div>
+                  <div class="choice"><input type="radio" name="notice" id="nt-0" value="<7" checked><label for="nt-0">Under 7 days before</label></div>
+                </div>
+              </fieldset>
+              <fieldset>
+                <legend class="q">Did they offer you another flight?</legend>
+                <div class="choices two">
+                  <div class="choice"><input type="radio" name="offered" id="of-yes" value="yes" checked><label for="of-yes">Yes</label></div>
+                  <div class="choice"><input type="radio" name="offered" id="of-no" value="no"><label for="of-no">No</label></div>
+                </div>
+              </fieldset>
+              <div id="reroute-wrap" class="row">
+                <div class="field">
+                  <label class="label" for="depart-early">The new flight left</label>
+                  <select id="depart-early">
+                    <option value="0">At or after my original time</option>
+                    <option value="60">Up to 1 hour earlier</option>
+                    <option value="120">1 to 2 hours earlier</option>
+                    <option value="180">More than 2 hours earlier</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <p class="label" id="reroute-q">and got me to my final destination this late</p>
+                  <div class="duration" role="group" aria-labelledby="reroute-q">
+                    <div class="unit"><input type="number" id="re-h" min="0" max="96" inputmode="numeric" placeholder="0" aria-label="Hours later than the original arrival"><span aria-hidden="true">h</span></div>
+                    <div class="unit"><input type="number" id="re-m" min="0" max="59" step="5" inputmode="numeric" placeholder="00" aria-label="Minutes later than the original arrival"><span aria-hidden="true">min</span></div>
+                  </div>
+                  <p class="hint">Compared with the arrival time on your original booking.</p>
+                </div>
+                <fieldset>
+                  <legend class="label">What did you end up taking?</legend>
+                  <div class="choices two">
+                    <div class="choice"><input type="radio" name="took" id="took-flight" value="reroute" checked><label for="took-flight">The new flight</label></div>
+                    <div class="choice"><input type="radio" name="took" id="took-refund" value="refund"><label for="took-refund">A refund</label></div>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+
+            <div class="sub" id="denied-wrap" hidden>
+              <fieldset>
+                <legend class="q">Did you give up your seat voluntarily?</legend>
+                <div class="choices two">
+                  <div class="choice"><input type="radio" name="voluntary" id="vol-no" value="no" checked><label for="vol-no">No, they refused me</label></div>
+                  <div class="choice"><input type="radio" name="voluntary" id="vol-yes" value="yes"><label for="vol-yes">Yes, I volunteered</label></div>
+                </div>
+              </fieldset>
+              <div>
+                <p class="q" id="dn-q">The replacement got you to your final destination how late?</p>
+                <div class="duration" role="group" aria-labelledby="dn-q">
+                  <div class="unit"><input type="number" id="dn-h" min="0" max="96" inputmode="numeric" placeholder="0" aria-label="Hours late"><span aria-hidden="true">h</span></div>
+                  <div class="unit"><input type="number" id="dn-m" min="0" max="59" step="5" inputmode="numeric" placeholder="00" aria-label="Minutes late"><span aria-hidden="true">min</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="sub" id="fare-wrap" hidden>
+              <div class="field">
+                <label class="q" for="fare" id="fare-label">What did you pay for that flight, one way?</label>
+                <div class="row row-2">
+                  <input type="number" id="fare" min="0" step="1" inputmode="decimal" placeholder="Amount" aria-describedby="fare-hint">
+                  <select id="fare-cur" aria-label="Currency">
+                    <option value="EUR">EUR €</option>
+                    <option value="GBP">GBP £</option>
+                    <option value="USD">USD $</option>
+                    <option value="CAD">CAD $</option>
+                  </select>
+                </div>
+                <p class="hint" id="fare-hint">Only for the flight that went wrong, taxes included.</p>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <label class="label" for="cause">What did the airline blame?</label>
+            <select id="cause" aria-describedby="cause-hint">
+              <option value="unknown">They didn’t say, or I’m not sure</option>
+              <option value="technical">Technical problem with the plane</option>
+              <option value="crew">Crew shortage or crew out of hours</option>
+              <option value="ops">Operational reasons or IT failure</option>
+              <option value="strike-own">Strike by the airline’s own staff</option>
+              <option value="strike-other">Air traffic control or airport staff strike</option>
+              <option value="atc">Air traffic control limits or airport closure</option>
+              <option value="weather">Bad weather</option>
+              <option value="bird">Bird strike</option>
+              <option value="security">Medical emergency, security or unruly passenger</option>
+              <option value="knockon">The plane came in late from an earlier flight</option>
+              <option value="overbooking">Overbooking</option>
+            </select>
+            <p class="hint" id="cause-hint">Airlines only escape paying for genuinely extraordinary events, and they have to prove it.</p>
+          </fieldset>
+
+          <div class="submit-row">
+            <button class="btn btn-signal" type="submit" id="submit">What am I owed? <svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+            <span class="note-inline" id="form-status" role="status"></span>
+          </div>
+        </div>
+
+        <aside class="pass-stub" aria-label="Trip summary">
+          <div class="stub-route">
+            <div><div class="stub-code empty" id="stub-from">---</div><div class="stub-city" id="stub-from-city">From</div></div>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-plane" transform="rotate(90 12 12)"/></svg>
+            <div><div class="stub-code empty" id="stub-to">---</div><div class="stub-city" id="stub-to-city">To</div></div>
+          </div>
+          <dl class="stub-facts">
+            <div><dt>Distance</dt><dd id="stub-dist">-</dd></div>
+            <div><dt>Rules</dt><dd id="stub-rules">-</dd></div>
+            <div><dt>Airline</dt><dd id="stub-airline">-</dd></div>
+            <div><dt>Top payout</dt><dd id="stub-top">-</dd></div>
+          </dl>
+          <div class="barcode" aria-hidden="true"></div>
+          <div class="stub-note">Great-circle distance, first airport to last</div>
+        </aside>
+      </form>
+
+      <div class="verdict" id="verdict" hidden tabindex="-1" aria-labelledby="verdict-title">
+        <h2 class="sr-only" id="verdict-title">Your result</h2>
+        <div aria-live="polite" id="verdict-live">
+          <div class="vboard" id="vboard"></div>
+        </div>
+        <div class="vgrid">
+          <div class="panel">
+            <p class="kicker panel-kicker">The fine print, in plain words</p>
+            <h3>Why this number</h3>
+            <ul class="notes" id="v-notes"></ul>
+            <div class="also" id="v-also"></div>
+            <p class="cites" id="v-cites"></p>
+          </div>
+          <div class="panel">
+            <p class="kicker panel-kicker">At the airport</p>
+            <h3>What they owe you on the spot</h3>
+            <ul class="notes" id="v-care"></ul>
+          </div>
+        </div>
+        <div class="vactions">
+          <a class="btn btn-signal" href="#letter" id="to-letter"><svg aria-hidden="true"><use href="#i-letter"/></svg>Write my claim letter</a>
+          <a class="btn btn-ghost" href="#share" id="to-share"><svg aria-hidden="true"><use href="#i-share"/></svg>Share this</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="letter" aria-labelledby="letter-title" hidden>
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="kicker">Step 2 · Send it yourself</p>
+          <h2 id="letter-title">Your claim letter</h2>
+          <p>Fill in the blanks and the letter writes itself, with the right law and the right amount. Send it to the airline’s customer relations team or paste it into their claim form. Keep a copy.</p>
+        </div>
+      </div>
+      <div class="letter-grid">
+        <form class="letter-form" id="letter-form" novalidate>
+          <div class="row row-2">
+            <div><label class="label" for="l-name">Your full name</label><input type="text" id="l-name" autocomplete="name"></div>
+            <div><label class="label" for="l-email">Your email</label><input type="email" id="l-email" autocomplete="email"></div>
+          </div>
+          <div class="row row-2">
+            <div><label class="label" for="l-flight">Flight number</label><input type="text" id="l-flight" placeholder="LH400" autocapitalize="characters"></div>
+            <div><label class="label" for="l-date">Flight date</label><input type="date" id="l-date"></div>
+          </div>
+          <div class="row row-2">
+            <div><label class="label" for="l-ref">Booking reference</label><input type="text" id="l-ref" placeholder="6 characters" autocapitalize="characters"></div>
+            <div><label class="label" for="l-pax">Passengers claiming</label><input type="number" id="l-pax" min="1" max="9" value="1" inputmode="numeric"></div>
+          </div>
+          <div><label class="label" for="l-address">Postal address (optional)</label><input type="text" id="l-address" autocomplete="street-address"></div>
+          <div class="row row-2">
+            <div><label class="label" for="l-costs">Money you spent waiting (optional)</label><input type="number" id="l-costs" min="0" step="0.01" inputmode="decimal" placeholder="Meals, hotel, taxis"></div>
+            <div><label class="label" for="l-airline-email">Airline claims email (optional)</label><input type="email" id="l-airline-email" placeholder="From their website"></div>
+          </div>
+          <p class="hint">Everything you type stays on this page. Nothing is saved or sent anywhere until you send the email yourself.</p>
+        </form>
+        <div class="paper">
+          <div class="paper-bar">
+            <label class="label" for="letter-text">Letter preview (you can edit it)</label>
+            <div class="paper-actions">
+              <button type="button" class="btn btn-small" id="copy-letter"><svg aria-hidden="true"><use href="#i-copy"/></svg>Copy</button>
+              <a class="btn btn-small btn-ghost" id="mail-letter" href="#"><svg aria-hidden="true"><use href="#i-mail"/></svg>Email</a>
+            </div>
+          </div>
+          <textarea class="letter-text" id="letter-text" spellcheck="true"></textarea>
+        </div>
+      </div>
+
+      <div class="escalate">
+        <h3 style="margin-bottom:16px">If they say no, or say nothing</h3>
+        <ol class="steps" id="steps"></ol>
+      </div>
+    </div>
+  </section>
+
+  <section id="share" aria-labelledby="share-title" hidden>
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="kicker">Step 3 · Tell the people you travel with</p>
+          <h2 id="share-title">Were they on that flight too?</h2>
+          <p>Every passenger on the flight has their own claim, kids included. Send this to whoever was sitting next to you.</p>
+        </div>
+      </div>
+      <div class="share">
+        <canvas id="share-card" width="1200" height="630" role="img" aria-label="Share card"></canvas>
+        <div>
+          <p class="share-text" id="share-text"></p>
+          <div class="share-buttons">
+            <button type="button" class="btn btn-small" id="share-native"><svg aria-hidden="true"><use href="#i-share"/></svg>Share</button>
+            <button type="button" class="btn btn-small btn-ghost" id="copy-share"><svg aria-hidden="true"><use href="#i-copy"/></svg>Copy text</button>
+            <button type="button" class="btn btn-small btn-ghost" id="copy-card"><svg aria-hidden="true"><use href="#i-copy"/></svg>Copy image</button>
+            <button type="button" class="btn btn-small btn-ghost" id="save-card"><svg aria-hidden="true"><use href="#i-save"/></svg>Download image</button>
+          </div>
+          <p class="hint">The card shows the amount and the rule. It leaves out your name, flight number and dates.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cheat" aria-labelledby="cheat-title">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="kicker">Screenshot this before your next trip</p>
+          <h2 id="cheat-title">The cheat sheet</h2>
+        </div>
+      </div>
+      <div class="cheat" id="cheat-card"></div>
+    </div>
+  </section>
+
+  <section id="faq" aria-labelledby="faq-title">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="kicker">Straight answers</p>
+          <h2 id="faq-title">Before you hit send</h2>
+        </div>
+      </div>
+      <div class="faq" id="faq-list"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-grid">
+    <div>
+      <p class="stamp">Rules last checked September 2026</p>
+      <p><strong>General information, not legal advice.</strong> Delay Pay reads the regulations and court rulings so you don’t have to, but your case can turn on details we can’t see. If a lot of money is at stake, talk to the enforcement body for your country or a lawyer.</p>
+      <p>Everything runs in your browser. Your flight details and your letter never leave your device. Airport data from <a href="https://ourairports.com/data/">OurAirports</a> (public domain).</p>
+    </div>
+    <div class="foot-links">
+      <a id="author-link" href="https://github.com/prathammukewar">Made by Pratham Mukewar</a>
+      <a id="source-link" href="https://github.com/prathammukewar/delay-pay">Source</a>
+      <a id="issue-link" href="https://github.com/prathammukewar/delay-pay/issues">Spot something wrong? Open an issue</a>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="sr-only" id="combo-status" aria-live="polite"></div>
+</body>
+</html>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://prathammukewar.github.io/delay-pay/sitemap.xml

@@ -1,4 +1,4 @@
-// Airport data from OurAirports (https://ourairports.com/data/), released into the public domain.
+// Airport data from OurAirports (https://github.com/davidmegginson/ourairports-data), released into the public domain.
 // Large and medium airports with scheduled service and an IATA code. Built 3244 rows, 2026-09.
 // Row format: IATA|name|city|country|lat|lon|size(L/M)|extra search words
 

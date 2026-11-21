@@ -1591,6 +1591,28 @@ input[aria-invalid='true'] {
   background: var(--board);
 }
 
+.share-sub {
+  font-size: 19px;
+  margin: 0 0 10px;
+}
+
+.share .hint + .share-sub {
+  margin-top: 32px;
+}
+
+.shared-note {
+  background: var(--paper-2);
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin: 0 0 14px;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.shared-note[hidden] {
+  display: none;
+}
+
 .share-text {
   font-size: 17px;
   font-weight: 600;

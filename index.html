@@ -337,6 +337,7 @@
 
       <div class="verdict" id="verdict" hidden tabindex="-1" aria-labelledby="verdict-title">
         <h2 class="sr-only" id="verdict-title">Your result</h2>
+        <p class="shared-note" id="shared-note" hidden>Someone on your flight sent you this. The route, airline and delay come from their trip, so check they match yours before you claim.</p>
         <div aria-live="polite" id="verdict-live">
           <div class="vboard" id="vboard"></div>
         </div>
@@ -423,9 +424,17 @@
       <div class="share">
         <canvas id="share-card" width="1200" height="630" role="img" aria-label="Share card"></canvas>
         <div>
+          <h3 class="share-sub">Send them your flight</h3>
+          <p class="share-text" id="crew-text"></p>
+          <div class="share-buttons">
+            <button type="button" class="btn btn-small" id="crew-native"><svg aria-hidden="true"><use href="#i-share"/></svg>Send</button>
+            <button type="button" class="btn btn-small btn-ghost" id="crew-copy"><svg aria-hidden="true"><use href="#i-copy"/></svg>Copy message</button>
+          </div>
+          <p class="hint">The link fills in your route, airline and how late you landed, so they see their own amount in one tap. It leaves out names, flight numbers and dates.</p>
+          <h3 class="share-sub">Or post it</h3>
           <p class="share-text" id="share-text"></p>
           <div class="share-buttons">
-            <button type="button" class="btn btn-small" id="share-native"><svg aria-hidden="true"><use href="#i-share"/></svg>Share</button>
+            <button type="button" class="btn btn-small btn-ghost" id="share-native"><svg aria-hidden="true"><use href="#i-share"/></svg>Share</button>
             <button type="button" class="btn btn-small btn-ghost" id="copy-share"><svg aria-hidden="true"><use href="#i-copy"/></svg>Copy text</button>
             <button type="button" class="btn btn-small btn-ghost" id="copy-card"><svg aria-hidden="true"><use href="#i-copy"/></svg>Copy image</button>
             <button type="button" class="btn btn-small btn-ghost" id="save-card"><svg aria-hidden="true"><use href="#i-save"/></svg>Download image</button>
@@ -466,7 +475,7 @@
     <div>
       <p class="stamp">Rules last checked September 2026</p>
       <p><strong>General information, not legal advice.</strong> Delay Pay reads the regulations and court rulings so you don’t have to, but your case can turn on details we can’t see. If a lot of money is at stake, talk to the enforcement body for your country or a lawyer.</p>
-      <p>Everything runs in your browser. Your flight details and your letter never leave your device. Airport data from <a href="https://ourairports.com/data/">OurAirports</a> (public domain).</p>
+      <p>Everything runs in your browser. Your flight details and your letter never leave your device. Airport data from <a href="https://github.com/davidmegginson/ourairports-data">OurAirports</a> (public domain).</p>
     </div>
     <div class="foot-links">
       <a id="author-link" href="https://github.com/prathammukewar">Made by Pratham Mukewar</a>

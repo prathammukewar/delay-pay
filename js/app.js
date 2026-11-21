@@ -123,6 +123,7 @@ const state = {
   airline: null,
   airlineText: '',
   lastVerdict: null,
+  lastInput: null,
 };
 
 const describeAirport = (a) => ({
@@ -514,6 +515,36 @@ function wireLetter() {
 }
 
 /* ---------- Share ---------- */
+// A link that opens the checker with this flight filled in, for the people who were on it.
+function flightLink(input) {
+  const q = new URLSearchParams();
+  q.set('from', input.from.code);
+  q.set('to', input.to.code);
+  const via = input.via.map((a) => a.code).filter(Boolean);
+  if (via.length) {
+    q.set('via', via.join(','));
+    if (!input.singleBooking) q.set('separate', '1');
+  }
+  if (input.airline && input.airline.code) q.set('airline', input.airline.code);
+  if (input.event === 'delay') {
+    q.set('late', String(input.delayMin));
+    if (input.cause !== 'unknown') q.set('cause', input.cause);
+  } else {
+    q.set('ev', input.event);
+  }
+  return `${SITE_URL}?${q}`;
+}
+
+function crewText() {
+  const p = state.lastVerdict.primary;
+  const money = `${p.upTo ? 'up to ' : ''}${formatMoney(p.amount * 1, p.currency)}`;
+  const input = state.lastInput;
+  const link = flightLink(input);
+  return input.event === 'delay'
+    ? `You were on that flight too, so the airline probably owes you ${money} as well. I filled the flight in, so it’s one tap to see yours: ${link}`
+    : `You were on that flight too, so the airline might owe you ${money} as well. The route is already filled in: ${link}`;
+}
+
 function shareData() {
   const v = state.lastVerdict;
   const p = v.primary;
@@ -525,6 +556,7 @@ function shareData() {
 async function paintShare() {
   const { text, card } = shareData();
   $('#share-text').textContent = text;
+  $('#crew-text').textContent = crewText();
   const canvas = $('#share-card');
   drawShareCard(canvas, card);
   canvas.setAttribute('aria-label', `Share card: ${card.top} ${card.amount}. ${card.line}. ${shortUrl}`);
@@ -533,6 +565,16 @@ async function paintShare() {
 }
 
 function wireShare() {
+  $('#crew-copy').addEventListener('click', () => copyText(crewText(), 'Message copied'));
+  const crewBtn = $('#crew-native');
+  if (!navigator.share) crewBtn.hidden = true;
+  crewBtn.addEventListener('click', async () => {
+    try {
+      await navigator.share({ text: crewText() });
+    } catch {
+      /* user closed the share sheet */
+    }
+  });
   $('#copy-share').addEventListener('click', () => copyText(shareData().text, 'Share text copied'));
   $('#save-card').addEventListener('click', async () => {
     const blob = await canvasToBlob($('#share-card'));
@@ -668,6 +710,7 @@ function onSubmit(e) {
   $('#form-status').textContent = '';
   const v = assess(input);
   state.lastVerdict = v;
+  state.lastInput = input;
   renderVerdict(v);
   const box = $('#verdict');
   box.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
@@ -724,6 +767,7 @@ function wireForm() {
       if (input.from && input.to && !(input.event === 'delay' && input.delayMin === null)) {
         const v = assess(input);
         state.lastVerdict = v;
+        state.lastInput = input;
         renderVerdict(v);
       }
     }
@@ -748,6 +792,27 @@ function init() {
   if (f) comboFrom.set(f);
   if (t) comboTo.set(t);
   if (al) comboAirline.set(al);
+  // Links sent by someone on the same flight carry the rest of the trip too.
+  (params.get('via') || '').split(',').map((c) => airportByCode(c)).filter(Boolean).slice(0, 3).forEach((a) => addVia(a));
+  if (params.get('separate') === '1') $('#single-booking').checked = false;
+  const ev = $$('input[name="event"]').find((r) => r.value === params.get('ev'));
+  if (ev) {
+    ev.checked = true;
+    showEventFields();
+  }
+  const late = parseInt(params.get('late'), 10);
+  if (f && t && Number.isFinite(late) && late >= 0 && late < 10080) {
+    $('#ev-delay').checked = true;
+    $('#delay-h').value = String(Math.floor(late / 60));
+    $('#delay-m').value = String(late % 60);
+    const cause = $$('#cause option').find((o) => o.value === params.get('cause'));
+    if (cause) $('#cause').value = cause.value;
+    showEventFields();
+    $('#shared-note').hidden = false;
+    $('#checker').requestSubmit();
+    // Jump straight there; a smooth scroll during page load can get cut short.
+    requestAnimationFrame(() => $('#verdict').scrollIntoView({ behavior: 'instant', block: 'start' }));
+  }
 }
 
 init();

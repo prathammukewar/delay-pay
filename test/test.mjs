@@ -538,11 +538,16 @@ test('APPR: 400/700/1,000 large, 125/250/500 small, 900/1,800/2,400 bumped', () 
   eq(APPR.small.map((r) => r.amount).join(), '125,250,500');
   eq(APPR.deniedBoarding.map((r) => r.amount).join(), '900,1800,2400');
 });
-test('every source is https and checked 2026-09', () => {
+test('every source is https and has a checked month', () => {
   for (const [id, s] of Object.entries(SOURCES)) {
     ok(s.url.startsWith('https://'), id);
-    eq(s.checked, '2026-09', id);
+    ok(/^20\d\d-(0[1-9]|1[0-2])$/.test(s.checked) && s.checked >= '2026-09', id);
   }
+});
+test('reform note names the regulation and the date it applies', () => {
+  ok(SOURCES.euReform.url.includes('2026/2202'), 'eur-lex link');
+  const faq = FAQ.find(([q]) => q.includes('EU261 about to change'));
+  ok(faq && faq[1].join(' ').includes('23 October 2027'), 'faq date');
 });
 test('every cause has a note', () => Object.entries(EU_CAUSES).forEach(([k, c]) => ok(c.note && c.ec, k)));
 

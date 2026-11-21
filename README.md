@@ -41,7 +41,7 @@ Optional analytics: put a GoatCounter code in `GOATCOUNTER` in `js/config.js`. I
 
 ## Credits
 
-Airport data comes from [OurAirports](https://ourairports.com/data/), which is in the public domain. Fonts are Archivo and IBM Plex Mono from Google Fonts.
+Airport data comes from [OurAirports](https://github.com/davidmegginson/ourairports-data), which is in the public domain. Fonts are Archivo and IBM Plex Mono from Google Fonts.
 
 ## License
 

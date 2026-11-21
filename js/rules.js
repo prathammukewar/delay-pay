@@ -32,9 +32,9 @@ export const SOURCES = {
     checked: '2026-09',
   },
   euReform: {
-    title: 'EU261 reform, procedure 2013/0072(COD) (European Parliament)',
-    url: 'https://oeil.europarl.europa.eu/oeil/en/procedure-file?reference=2013/0072(COD)',
-    checked: '2026-09',
+    title: 'Regulation (EU) 2026/2202, the EU261 reform (EUR-Lex)',
+    url: 'https://eur-lex.europa.eu/eli/reg/2026/2202/oj/eng',
+    checked: '2026-11',
   },
   uk261: {
     title: 'UK Regulation 261/2004 (legislation.gov.uk)',
@@ -684,7 +684,7 @@ function deadlineNotes(kind, route) {
     { tone: 'info', text },
     {
       tone: 'info',
-      text: 'Coming later: a reform of EU261 was signed on 16 September 2026 and is waiting for publication in the Official Journal. It keeps the 3-hour rule and the €250, €400 and €600 amounts but adds a 9-month deadline to claim. It only applies a year after it enters into force, so late 2027 at the earliest. Today’s rules apply until then.',
+      text: 'Coming later: the EU261 reform (Regulation 2026/2202) is now law but only applies from 23 October 2027. It keeps the 3-hour rule and the €250, €400 and €600 amounts and adds a 9-month deadline to claim. Today’s rules apply until then.',
     },
   ];
 }
@@ -1382,8 +1382,8 @@ export const FAQ = [
   [
     'Is EU261 about to change?',
     [
-      'Yes, but not yet. After 13 years of arguing, the EU signed a reform on 16 September 2026. It keeps the 3-hour threshold and the €250, €400 and €600 amounts, gives you 9 months to claim, and changes the cancellation and half-payment rules.',
-      'It only applies a year after it enters into force, and it can’t enter into force until it’s published in the Official Journal. That hadn’t happened by the end of September 2026. Until then the 2004 rules are the law, and that’s what this site applies.',
+      'Yes, but not until 23 October 2027. After 13 years of arguing, the EU signed a reform on 16 September 2026 and published it on 2 October as Regulation 2026/2202. It keeps the 3-hour threshold and the €250, €400 and €600 amounts, gives you 9 months to claim, and changes the cancellation and half-payment rules.',
+      'Until 23 October 2027 the 2004 rules are still the law, and that’s what this site applies.',
     ],
   ],
   [
